@@ -11,12 +11,12 @@ data class Country(
   val iso3: String,
   val covid19: Covid19,
   @SerializedName("current_president")
-  val currentPresident: CurrentPresident,
+  val currentPresident: CurrentPresident?,
   val currency: String,
   @SerializedName("phone_code")
   val phoneCode: String,
   val continent: String,
-  val description: String,
+  val description: String?,
   val size: String,
   val population: String,
   @SerializedName("href")

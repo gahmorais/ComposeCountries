@@ -1,3 +1,6 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
   id("com.android.application")
   id("org.jetbrains.kotlin.android")
@@ -5,8 +8,10 @@ plugins {
 
 val koin_version: String by project
 val ktor_version: String by project
-val logback_version: String by project
+val slf4j_version: String by project
 val timber_version: String by project
+val okhttp_version: String by project
+val coil_version: String by project
 android {
   namespace = "br.com.backupautomacao.exploringandroid"
   compileSdk = 34
@@ -25,6 +30,12 @@ android {
   }
 
   buildTypes {
+    debug {
+      val properties = Properties()
+      properties.load(FileInputStream(rootProject.file("local.properties")))
+      val apiToken = properties["API_TOKEN"] as String
+      resValue("string", "API_TOKEN", apiToken)
+    }
     release {
       isMinifyEnabled = false
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
@@ -70,6 +81,7 @@ dependencies {
 
   //Dependency Injection
   implementation("io.insert-koin:koin-android:$koin_version")
+  implementation("io.insert-koin:koin-androidx-compose:$koin_version")
 
   //Ktor
   implementation("io.ktor:ktor-serialization-gson:$ktor_version")
@@ -78,8 +90,13 @@ dependencies {
   implementation("io.ktor:ktor-client-cio:$ktor_version")
   implementation("io.ktor:ktor-client-auth:$ktor_version")
   implementation("io.ktor:ktor-client-logging:$ktor_version")
-//  implementation("ch.qos.logback:logback-classic:$logback_version")
+  implementation("org.slf4j:slf4j-simple:$slf4j_version")
+  implementation("io.ktor:ktor-client-okhttp:$ktor_version")
+  implementation("com.squareup.okhttp3:logging-interceptor:$okhttp_version")
 
   //Logger
-  implementation ("com.jakewharton.timber:timber:$timber_version")
+  implementation("com.jakewharton.timber:timber:$timber_version")
+
+  //Coil
+  implementation("io.coil-kt:coil-compose:$coil_version")
 }
