@@ -12,6 +12,7 @@ val slf4j_version: String by project
 val timber_version: String by project
 val okhttp_version: String by project
 val coil_version: String by project
+val navigation_compose_version: String by project
 android {
   namespace = "br.com.backupautomacao.exploringandroid"
   compileSdk = 34
@@ -78,6 +79,8 @@ dependencies {
   androidTestImplementation("androidx.compose.ui:ui-test-junit4")
   debugImplementation("androidx.compose.ui:ui-tooling")
   debugImplementation("androidx.compose.ui:ui-test-manifest")
+  runtimeOnly("androidx.navigation:navigation-compose:$navigation_compose_version")
+
 
   //Dependency Injection
   implementation("io.insert-koin:koin-android:$koin_version")

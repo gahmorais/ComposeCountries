@@ -6,16 +6,12 @@ import br.com.backupautomacao.exploringandroid.ui.api.CountriesApi
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
-import io.ktor.client.plugins.auth.Auth
-import io.ktor.client.plugins.auth.providers.BearerTokens
-import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
 import io.ktor.client.request.header
 import io.ktor.serialization.gson.gson
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
-import timber.log.Timber
 
 val mainModule = module {
   single {

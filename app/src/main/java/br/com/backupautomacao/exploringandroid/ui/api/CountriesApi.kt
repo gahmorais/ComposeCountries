@@ -8,8 +8,6 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import io.ktor.client.request.parameter
 import io.ktor.http.HttpStatusCode
-import okhttp3.Response
-import timber.log.Timber
 
 class CountriesApi(private val httpClient: HttpClient) {
 

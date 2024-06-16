@@ -6,11 +6,14 @@ import br.com.backupautomacao.exploringandroid.ui.api.CountriesApi
 import br.com.backupautomacao.exploringandroid.ui.api.errors.ResponseError
 import br.com.backupautomacao.exploringandroid.ui.api.models.Country
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.util.UUID
 
 class MainViewModel(private val countriesApi: CountriesApi) : ViewModel() {
 
@@ -26,14 +29,17 @@ class MainViewModel(private val countriesApi: CountriesApi) : ViewModel() {
   }
 
   fun getCountryByName(name: String) {
+    if (name.isEmpty()) return
     viewModelScope.launch(Dispatchers.IO) {
       val result = countriesApi.getCountriesByName(name)
       if (result.data != null) {
         val country = result.data
         _countries.update { listOf(country) }
       } else {
-        val responseError = result.error
-        _error.update { responseError }
+        val responseError = result
+          .error
+          ?.copy(id = UUID.randomUUID().toString())
+        _error.emit(responseError)
       }
     }
   }
