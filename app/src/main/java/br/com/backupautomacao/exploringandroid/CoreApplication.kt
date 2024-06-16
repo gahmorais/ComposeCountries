@@ -1,8 +1,8 @@
-package br.com.backupautomacao.exploringandroid.ui
+package br.com.backupautomacao.exploringandroid
 
 import android.app.Application
-import br.com.backupautomacao.exploringandroid.ui.di.mainModule
-import br.com.backupautomacao.exploringandroid.ui.di.viewModelModule
+import br.com.backupautomacao.exploringandroid.di.mainModule
+import br.com.backupautomacao.exploringandroid.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin

@@ -1,4 +1,4 @@
-package br.com.backupautomacao.exploringandroid.ui.di
+package br.com.backupautomacao.exploringandroid.di
 
 import br.com.backupautomacao.exploringandroid.ui.activities.main.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
